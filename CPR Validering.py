@@ -7,11 +7,15 @@ def validate(cpr):
         raise Exception("Der skal være 10 tal i dit cpr")
     else:
         listCpr = list(cpr)
-        for x in range (0,11):
-            test = (checkDiget[x]* listCpr[x])
-            print(test)
+        sumCpr = 0
+        for x in range (0,10):
+            sumCpr += (checkDiget[x]* int(listCpr[x]))
+        print(sumCpr & 11)
 
-
+        if (sumCpr % 11) != 0:
+            print('Dit cpr er ikke rigtig')
+        else:
+            print('Dit CPR er valid (^w^)')
 validate(cpr)
 
 
