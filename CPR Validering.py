@@ -7,7 +7,11 @@ def validate(cpr):
         raise Exception("Der skal være 10 tal i dit cpr")
     else:
         listCpr = list(cpr)
-        
+        for x in range (0,11):
+            test = (checkDiget[x]* listCpr[x])
+            print(test)
+
+
 validate(cpr)
 
 
