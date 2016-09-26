@@ -5,3 +5,9 @@ def validate(cpr):
     int(cpr)
     if len(cpr) != 10:
         raise Exception("Der skal være 10 tal i dit cpr")
+    else:
+        listCpr = list(cpr)
+        
+validate(cpr)
+
+
