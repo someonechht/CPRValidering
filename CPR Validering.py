@@ -7,7 +7,7 @@ dateCheck = False
 def validate(cpr):
     int(cpr)
     if len(cpr) != 10:
-        print('Der skal være 10 tal i dit CPR')
+        print('Der skal være 10 tal i dit CPR nummer')
 #        raise Exception("Der skal være 10 tal i dit CPR")
     else:
         listCpr = list(cpr)
@@ -18,7 +18,7 @@ def validate(cpr):
         #modulo 11 kontrol
         if (sumCpr % 11) != 0:
             global moduloCheck
-            print('Ukorrekt CPR!')
+            moduloCheck = False
         else:
             moduloCheck = True
 
@@ -57,19 +57,24 @@ def validate(cpr):
             print('Fødselsdato:' + str(day) +'-'+ str(month) +'-'+ str(year))
             dateCheck = True
         except:
-            print('Ukorrekt CPR!')
+            dateCheck = False
 
-        #gender
-        if int(cpr[-1]) % 2 == 0:
-            print('Køn: Kvinde')
-        else:
-            print('Køn: Mand')
+
 
 
     if moduloCheck == True:
         if dateCheck == True:
-            print('CPR godkend')
+        #gender
+            if int(cpr[-1]) % 2 == 0:
+                print('Køn: Kvinde')
+            else:
+                print('Køn: Mand')
 
+            print('CPR godkend')
+        else:
+            print('Invalid CPR')
+    else:
+        print('Invalid CPR')
 
 
 
