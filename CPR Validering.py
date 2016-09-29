@@ -28,6 +28,22 @@ def validate(cpr):
         year = int(cpr[4:6])
         month = int(cpr[2:4])
         day = int(cpr[0:2])
-        
+        if (cpr[6]) <= 3:
+            year = year + 2000
+        elif (cpr[6]) == 4 and if :
+            year = year + 2000
+        elif (cpr[6]) <= 3:
+            year = year + 2000
+        elif (cpr[6]) <= 3:
+            year = year + 2000
+        elif (cpr[6]) <= 3:
+            year = year + 2000
+        elif (cpr[6]) <= 3:
+            year = year + 2000
+        else (cpr[6]) <= 3:
+            year = year + 2000
+
+
+
 validate(cpr)
 # print(modulo)
