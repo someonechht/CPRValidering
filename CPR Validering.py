@@ -1,6 +1,9 @@
 from datetime import datetime
-cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
+# cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
+cpr = '1212075600'
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
+
+
 
 def validate(cpr):
     int(cpr)
@@ -11,12 +14,20 @@ def validate(cpr):
         sumCpr = 0
         for x in range (0,10):
             sumCpr += (checkDiget[x]* int(listCpr[x]))
-        print(sumCpr & 11)
 
+        #modulo 11 kontrol
         if (sumCpr % 11) != 0:
+            global modulo
+            modulo = False
             print('Ukorrekt CPR!')
         else:
+            modulo = True
             print('Dit CPR er godkendt')
+
+        #dato kontrol
+        year = int(cpr[4:6])
+        month = int(cpr[2:4])
+        day = int(cpr[0:2])
+        
 validate(cpr)
-
-
+# print(modulo)
