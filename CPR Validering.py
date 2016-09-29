@@ -1,3 +1,4 @@
+
 cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 
@@ -13,9 +14,9 @@ def validate(cpr):
         print(sumCpr & 11)
 
         if (sumCpr % 11) != 0:
-            print('Dit cpr er ikke rigtig')
+            print('Ukorrekt CPR!')
         else:
-            print('Dit CPR er valid (^w^)')
+            print('Dit CPR er godkendt')
 validate(cpr)
 
 
