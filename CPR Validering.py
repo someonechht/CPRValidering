@@ -1,4 +1,4 @@
-
+from datetime import datetime
 cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 
