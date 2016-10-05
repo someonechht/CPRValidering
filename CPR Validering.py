@@ -1,14 +1,37 @@
 from datetime import datetime
-cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
+import pickle
+cpr = 0
+f = open(log.txt)
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 moduloCheck = False
 dateCheck = False
+run = True  #while loop for validate
+Run = True  #bool for moduleChecck and dateCheck to run
 def validate(cpr):
-    int(cpr)
+    cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
+
+    if cpr == 'quit' or cpr == 'exit':
+        print('I quit')
+        global run
+        run = False
+        exit()
+
+    if '-' or '/' in cpr:
+        cpr = cpr.replace('-', '')
+        cpr = cpr.replace('/', '')
     if len(cpr) != 10:
-        print('Der skal være 10 tal i dit CPR nummer')
-#        raise Exception("Der skal være 10 tal i dit CPR")
-    else:
+        print('Der skal være 10 cifre i dit CPR nummer')
+#       raise Exception("Der skal være 10 tal i dit CPR")
+    try:
+        int(cpr)
+        global Run
+        Run = True
+    except:
+        Run = False
+        print('Dit cpr skal bestå af tal')
+
+    if Run == True:
+        int(cpr)
         listCpr = list(cpr)
         sumCpr = 0
         for x in range (0,10):
@@ -53,30 +76,28 @@ def validate(cpr):
 
         try:
             datetime(year, month, day)
-            print('Fødselsdato:' + str(day) +'-'+ str(month) +'-'+ str(year))
             dateCheck = True
         except:
             dateCheck = False
 
+        if moduloCheck == True:
+            if dateCheck == True:
+                print('Fødselsdato: ' + str(day) + '-' + str(month) + '-' + str(year))
+            #køn
+                if int(cpr[-1]) % 2 == 0:
+                    print('Køn: Kvinde')
+                else:
+                    print('Køn: Mand')
 
-
-
-    if moduloCheck == True:
-        if dateCheck == True:
-        #køn
-            if int(cpr[-1]) % 2 == 0:
-                print('Køn: Kvinde')
+                print('CPR godkend')
             else:
-                print('Køn: Mand')
-
-            print('CPR godkend')
+                print('Invalid CPR')
         else:
             print('Invalid CPR')
-    else:
-        print('Invalid CPR')
 
 
+while run == True:
+    validate(cpr)
 
-validate(cpr)
 
 # print(modulo)
