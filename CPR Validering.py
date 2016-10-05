@@ -9,17 +9,30 @@ Run = True  #bool for moduleChecck and dateCheck to run
 def validate(cpr):
     cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
 
-    if cpr == 'quit' or cpr == 'exit':
-        print('I quit')
+    #quit commands
+    if cpr == 'quit' or cpr == 'exit' or cpr == 'kill':
         global run
         run = False
+        print('I quit')
         exit()
+
+    #log commands
+    if cpr == 'new log' or cpr == 'clear log' or cpr == 'clear':
+        f = open('log', 'w')
+        f.write('ERROR LOG\n')
+        f.close()
+        print('Clear log successful')
+        return
 
     if '-' or '/' in cpr:
         cpr = cpr.replace('-', '')
         cpr = cpr.replace('/', '')
     if len(cpr) != 10:
         print('Der skal være 10 cifre i dit CPR nummer')
+        f = open('log', 'a')
+        f.write('\n' + str(datetime.now()) + '\n' + 'CPR length error \nThe CPR does not contain 10 digit\n')
+        f.close()
+
 #       raise Exception("Der skal være 10 tal i dit CPR")
     try:
         int(cpr)
@@ -28,6 +41,9 @@ def validate(cpr):
     except:
         Run = False
         print('Dit cpr skal bestå af tal')
+        f = open('log', 'a')
+        f.write('\n' + str(datetime.now()) + '\n' + 'integer error  \nThe CPR is not a integer\n')
+        f.close()
 
     if Run == True:
         int(cpr)
@@ -91,13 +107,13 @@ def validate(cpr):
                 print('CPR godkend')
             else:
                 print('Invalid CPR')
-                f.write('\ndateCheck error \nThe date does not exist\n' + str(datetime.now()))
+                f.write('\n' + str(datetime.now()) + '\n' + 'dateCheck error \nThe date does not exist\n')
                 print('dateCheck error')
         else:
             print('Invalid CPR')
-            f.write('\nmoduloCheck error \nThe modulo does not mach up with modulo 11 \n' + str(datetime.now()))
+            f.write('\n' + str(datetime.now())+ '\n' + 'moduloCheck error \nThe modulo does not mach up with modulo 11\n')
             print('moduloError')
-    f.close()
+        f.close()
 
 
 while run == True:
