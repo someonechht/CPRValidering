@@ -1,3 +1,7 @@
+ERROR LOG FILE
 moduloCheck error 
 The modulo does not mach up with modulo 11 
-2016-10-05 14:36:27.541560
+2016-10-05 15:17:40.453416
+dateCheck error 
+The date does not exist
+2016-10-05 15:18:28.921316

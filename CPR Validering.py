@@ -78,7 +78,7 @@ def validate(cpr):
             dateCheck = True
         except:
             dateCheck = False
-        f = open('log', 'w')
+        f = open('log', 'a')
         if moduloCheck == True:
             if dateCheck == True:
                 print('Fødselsdato: ' + str(day) + '-' + str(month) + '-' + str(year))
@@ -91,11 +91,11 @@ def validate(cpr):
                 print('CPR godkend')
             else:
                 print('Invalid CPR')
-                f.write('dateCheck error \nThe date does not exist\n' + str(datetime.now()))
+                f.write('\ndateCheck error \nThe date does not exist\n' + str(datetime.now()))
                 print('dateCheck error')
         else:
             print('Invalid CPR')
-            f.write('moduloCheck error \nThe modulo does not mach up with modulo 11 \n' + str(datetime.now()))
+            f.write('\nmoduloCheck error \nThe modulo does not mach up with modulo 11 \n' + str(datetime.now()))
             print('moduloError')
     f.close()
 
