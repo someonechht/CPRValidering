@@ -1,7 +1,6 @@
 from datetime import datetime
 import pickle
 cpr = 0
-f = open(log.txt)
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 moduloCheck = False
 dateCheck = False
@@ -79,7 +78,7 @@ def validate(cpr):
             dateCheck = True
         except:
             dateCheck = False
-
+        f = open('log', 'w')
         if moduloCheck == True:
             if dateCheck == True:
                 print('Fødselsdato: ' + str(day) + '-' + str(month) + '-' + str(year))
@@ -92,8 +91,13 @@ def validate(cpr):
                 print('CPR godkend')
             else:
                 print('Invalid CPR')
+                f.write('dateCheck error The date does not exist')
+                print('dateCheck error')
         else:
             print('Invalid CPR')
+            f.write('moduloCheck error The modulo does not mach up with modulo 11')
+            print('moduloError')
+    f.close()
 
 
 while run == True:
