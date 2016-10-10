@@ -1,15 +1,17 @@
 from datetime import datetime
-import pickle
+from time import time
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 moduloCheck = False
 dateCheck = False
-run = True  #while loop for validate
-Run = True  #bool for moduleChecck and dateCheck to run
+timeDate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+run = True  #While loop for validate
+Run = True  #Bool for moduleChecck and dateCheck to run
+
 def validate(cpr):
     cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
 
-    #quit commands
+    #Quit commands
     if cpr == 'quit' or cpr == 'exit' or cpr == 'kill':
         global run
         run = False
@@ -27,22 +29,23 @@ def validate(cpr):
     if '-' or '/' in cpr:
         cpr = cpr.replace('-', '')
         cpr = cpr.replace('/', '')
+
     if len(cpr) != 10:
+        global Run
         print('Der skal være 10 cifre i dit CPR nummer')
         f = open('log', 'a')
-        f.write('\n' + str(datetime.now()) + '\n' + 'CPR length error \nThe CPR does not contain 10 digit\n')
+        f.write('\n' + str(timeDate) + '\n' + 'CPR length error \nThe CPR does not contain 10 digit\n')
         f.close()
+        Run = False
 
 #       raise Exception("Der skal være 10 tal i dit CPR")
     try:
         int(cpr)
-        global Run
-        Run = True
     except:
         Run = False
         print('Dit cpr skal bestå af tal')
         f = open('log', 'a')
-        f.write('\n' + str(datetime.now()) + '\n' + 'integer error  \nThe CPR is not a integer\n')
+        f.write('\n' + str(timeDate) + '\n' + 'integer error  \nThe CPR is not a integer\n')
         f.close()
 
     if Run == True:
@@ -107,11 +110,11 @@ def validate(cpr):
                 print('CPR godkend')
             else:
                 print('Invalid CPR')
-                f.write('\n' + str(datetime.now()) + '\n' + 'dateCheck error \nThe date does not exist\n')
+                f.write('\n' + str(timeDate) + '\n' + 'dateCheck error \nThe date does not exist\n')
                 print('dateCheck error')
         else:
             print('Invalid CPR')
-            f.write('\n' + str(datetime.now())+ '\n' + 'moduloCheck error \nThe modulo does not mach up with modulo 11\n')
+            f.write('\n' + str(timeDate)+ '\n' + 'moduloCheck error \nThe modulo does not mach up with modulo 11\n')
             print('moduloError')
         f.close()
 
