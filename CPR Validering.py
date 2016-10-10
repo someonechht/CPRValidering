@@ -1,9 +1,14 @@
+#1010174003 fremtid
+#3213982159 invalid dato
 from datetime import datetime
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 moduloCheck = False
 dateCheck = False
 timeDate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+dayNow = int(datetime.now().strftime("%d"))
+monthNow = int(datetime.now().strftime("%m"))
+yearNow = int(datetime.now().strftime("%Y"))
 run = True  #While loop for validate
 Run = True  #Bool for moduleChecck and dateCheck to run
 
@@ -94,10 +99,14 @@ def validate(cpr):
             year = year + 1900
 
         try:
-            datetime(year, month, day)
+            D = datetime(year, month, day)
             dateCheck = True
         except:
             dateCheck = False
+        if D.date() > datetime.today().date():
+            print('er du fra fremtiden?')
+            dateCheck = False
+
         f = open('log', 'a')
         if moduloCheck == True:
             if dateCheck == True:
