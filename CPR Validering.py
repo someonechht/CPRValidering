@@ -25,9 +25,10 @@ def validate(cpr):
         print('Clear log successful')
         return
 
-    if '-' or '/' in cpr:
+    if '-' or '/' or ' ' in cpr:
         cpr = cpr.replace('-', '')
         cpr = cpr.replace('/', '')
+        cpr = cpr.replace(' ', '')
 
     if len(cpr) != 10:
         global Run
