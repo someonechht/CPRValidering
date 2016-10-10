@@ -1,5 +1,4 @@
 from datetime import datetime
-from time import time
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
 moduloCheck = False
@@ -48,6 +47,7 @@ def validate(cpr):
         f.write('\n' + str(timeDate) + '\n' + 'integer error  \nThe CPR is not a integer\n')
         f.close()
 
+    #køre validering
     if Run == True:
         int(cpr)
         listCpr = list(cpr)
