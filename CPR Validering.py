@@ -1,6 +1,6 @@
 from datetime import datetime
 cpr = 0
-checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
+checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1);
 moduloCheck = False
 dateCheck = False
 timeDate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
