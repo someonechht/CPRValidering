@@ -3,14 +3,19 @@
 from datetime import datetime
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
-moduloCheck = False
-dateCheck = False
+moduloCheck = True #modulu 11 check
+dateCheck = True   #date existen check
+cpr10Check = True  #10 diget check
+futureCheck = True #birthday not from past or now check
+intCheck = True    #enter digtet check
 timeDate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-dayNow = int(datetime.now().strftime("%d"))
-monthNow = int(datetime.now().strftime("%m"))
-yearNow = int(datetime.now().strftime("%Y"))
+year = 2000
+month = 12
+day = 30
+d = datetime(year, month, day)
 run = True  #While loop for validate
-Run = True  #Bool for moduleChecck and dateCheck to run
+Run = True  #Bool for moduleCheck and dateCheck to run
+error = False
 
 def validate(cpr):
     cpr = input('Indsæt dit cpr dd/mm/åå/xxxx f.eks. 1234567890: ')
@@ -36,22 +41,24 @@ def validate(cpr):
         cpr = cpr.replace(' ', '')
 
     if len(cpr) != 10:
+        global cpr10Check
+        global error
         global Run
         print('Der skal være 10 cifre i dit CPR nummer')
-        f = open('log', 'a')
-        f.write('\n' + str(timeDate) + '\n' + 'CPR length error \nThe CPR does not contain 10 digit\n')
-        f.close()
+        error = True
+        cpr10Check = False
         Run = False
 
 #       raise Exception("Der skal være 10 tal i dit CPR")
     try:
         int(cpr)
     except:
+        global intCheck
         Run = False
+        intCheck = False
+        error = True
         print('Dit cpr skal bestå af tal')
-        f = open('log', 'a')
-        f.write('\n' + str(timeDate) + '\n' + 'integer error  \nThe CPR is not a integer\n')
-        f.close()
+
 
     #køre validering
     if Run == True:
@@ -65,6 +72,7 @@ def validate(cpr):
         if (sumCpr % 11) != 0:
             global moduloCheck
             moduloCheck = False
+            error = True
         else:
             moduloCheck = True
 
@@ -99,35 +107,55 @@ def validate(cpr):
             year = year + 1900
 
         try:
-            D = datetime(year, month, day)
+            global d
+            d = datetime(year, month, day)
             dateCheck = True
         except:
+            error = True
             dateCheck = False
-        if D.date() > datetime.today().date():
+        if d.date() > datetime.today().date():
+            global futureCheck
             print('er du fra fremtiden?')
-            dateCheck = False
+            futureCheck = False
+            error = True
 
-        f = open('log', 'a')
+
+
+
+
         if moduloCheck == True:
             if dateCheck == True:
-                print('Fødselsdato: ' + str(day) + '-' + str(month) + '-' + str(year))
-            #køn
-                if int(cpr[-1]) % 2 == 0:
-                    print('Køn: Kvinde')
-                else:
-                    print('Køn: Mand')
+                if futureCheck == True:
+                    print('Fødselsdato: ' + str(day) + '-' + str(month) + '-' + str(year))
 
-                print('CPR godkend')
+                    #køn
+                    if int(cpr[-1]) % 2 == 0:
+                        print('Køn: Kvinde')
+                    else:
+                        print('Køn: Mand')
+                    print('CPR godkend')
+
+                else:
+                    print('Invalid CPR')
             else:
                 print('Invalid CPR')
-                f.write('\n' + str(timeDate) + '\n' + 'dateCheck error \nThe date does not exist\n')
-                print('dateCheck error')
         else:
             print('Invalid CPR')
-            f.write('\n' + str(timeDate)+ '\n' + 'moduloCheck error \nThe modulo does not mach up with modulo 11\n')
-            print('moduloError')
+    #write log file
+    if error == True:
+        f = open('log', 'a')
+        f.write('\n' + str(timeDate))
+        if cpr10Check == False:
+            f.write('\n' + 'CPR length error \nThe CPR does not contain 10 digit\n')
+        if intCheck == False:
+            f.write('\n' + 'integer error  \nThe CPR is not a integer\n')
+        if dateCheck == False:
+            f.write('\n' + 'dateCheck error \nThe date does not exist\n')
+        if moduloCheck == False:
+            f.write('\n' + 'moduloCheck error \nThe modulo does not mach up with modulo 11\n')
+        if futureCheck == False:
+            f.write('\n' + 'futureCheck error \nThe time entered is from the future\n')
         f.close()
-
 
 while run == True:
     validate(cpr)
