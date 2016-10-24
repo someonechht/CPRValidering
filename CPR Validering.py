@@ -1,4 +1,4 @@
-#1010174003 fremtid
+#1010174003 fremtiden
 #3213982159 invalid dato
 from datetime import datetime
 cpr = 0
