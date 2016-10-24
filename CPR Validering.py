@@ -1,6 +1,8 @@
+#cpr test digits
 #1010174003 fremtiden
 #3213982159 invalid dato
-#3101164089 valid cpr
+#1234567890 invalid modulu 11
+#2902982135 valid cpr
 from datetime import datetime
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
@@ -117,6 +119,7 @@ def validate(cpr):
         except:
             error = True
             dateCheck = False
+
         if d.date() > datetime.today().date():
             global futureCheck
             futureCheck = False
