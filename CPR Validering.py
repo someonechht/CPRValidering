@@ -125,10 +125,6 @@ def validate(cpr):
             futureCheck = False
             error = True
 
-
-
-
-
         if moduloCheck == True:
             if dateCheck == True:
                 if futureCheck == True:
