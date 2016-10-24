@@ -1,18 +1,22 @@
 #1010174003 fremtiden
 #3213982159 invalid dato
+#3101164089 valid cpr
 from datetime import datetime
 cpr = 0
 checkDiget = (4, 3, 2, 7, 6, 5, 4, 3, 2, 1)
+
 moduloCheck = True #modulu 11 check
 dateCheck = True   #date existen check
 cpr10Check = True  #10 diget check
-futureCheck = True #birthday not from past or now check
+futureCheck = True #birthday not from future check
 intCheck = True    #enter digtet check
+
 timeDate = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 year = 2000
 month = 12
 day = 30
 d = datetime(year, month, day)
+
 run = True  #While loop for validate
 Run = True  #Bool for moduleCheck and dateCheck to run
 error = False
@@ -28,7 +32,7 @@ def validate(cpr):
         exit()
 
     #log commands
-    if cpr == 'new log' or cpr == 'clear log' or cpr == 'clear':
+    if cpr == 'new log' or cpr == 'clear log' or cpr == 'clear' or cpr == 'log clear':
         f = open('log', 'w')
         f.write('ERROR LOG\n')
         f.close()
