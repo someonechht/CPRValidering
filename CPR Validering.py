@@ -115,7 +115,6 @@ def validate(cpr):
             dateCheck = False
         if d.date() > datetime.today().date():
             global futureCheck
-            print('er du fra fremtiden?')
             futureCheck = False
             error = True
 
